@@ -15,25 +15,16 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    // Simple icons replacing lucide-react
-    const Plus = ({ size = 20 }) => <span style={{ fontSize: size }}>＋</span>;
-    const X = ({ size = 20 }) => <span style={{ fontSize: size }}>✕</span>;
+    const Plus    = ({ size = 20 }) => <span style={{ fontSize: size }}>＋</span>;
+    const X       = ({ size = 20 }) => <span style={{ fontSize: size }}>✕</span>;
     const Printer = ({ size = 20 }) => <span style={{ fontSize: size }}>🖨️</span>;
 
-    // localStorage-based persistence
     if (!window.storage) {
       window.storage = {
-        async list(prefix = '') {
-          const keys = [];
-          for (let i = 0; i < localStorage.length; i++) {
-            const k = localStorage.key(i);
-            if (!prefix || (k && k.startsWith(prefix))) keys.push(k);
-          }
-          return { keys };
-        },
-        async get(key) { const value = localStorage.getItem(key); return value ? { value } : null; },
-        async set(key, val) { localStorage.setItem(key, val); return true; },
-        async delete(key) { localStorage.removeItem(key); return true; },
+        async list(prefix = '') { const keys=[]; for (let i=0;i<localStorage.length;i++){const k=localStorage.key(i); if (!prefix || (k && k.startsWith(prefix))) keys.push(k);} return { keys }; },
+        async get(key){ const value=localStorage.getItem(key); return value ? { value } : null; },
+        async set(key,val){ localStorage.setItem(key,val); return true; },
+        async delete(key){ localStorage.removeItem(key); return true; },
       };
     }
 
@@ -65,49 +56,42 @@
         setSavedReports(reports);
       }
 
-      function formatCurrency(v) {
-        const n = parseFloat(v) || 0;
-        return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-      }
-
-      const calc = calculators[0];
-      const contract = parseFloat(calc.contractAmount) || 0;
-      const houseFeePct = parseFloat(calc.houseFeePercent) || 0;
-      const houseFeeAmt = contract * (houseFeePct / 100);
-      const labor = parseFloat(calc.laborMaterial) || 0;
-      const net = contract - houseFeeAmt - labor;
+      function fmt(v){ const n=parseFloat(v)||0; return n.toLocaleString('en-US',{style:'currency',currency:'USD'}); }
+      const c = calculators[0];
+      const contract = parseFloat(c.contractAmount)||0;
+      const housePct = parseFloat(c.houseFeePercent)||0;
+      const houseAmt = contract*(housePct/100);
+      const labor = parseFloat(c.laborMaterial)||0;
+      const net = contract - houseAmt - labor;
 
       return (
         <div className="p-4">
           <h1 className="text-2xl font-bold text-center mb-4">iPhone Profit Share Calculator</h1>
-
           <div className="bg-white p-4 rounded-lg shadow-md space-y-3">
             <div>
               <label className="block text-sm font-bold mb-1">Contract Amount</label>
               <input className="w-full border px-3 py-2 rounded" placeholder="e.g. 20000"
-                value={calc.contractAmount}
-                onChange={e => setCalculators([{ ...calc, contractAmount: e.target.value }])} />
+                     value={c.contractAmount}
+                     onChange={e=>setCalculators([{...c,contractAmount:e.target.value}])}/>
             </div>
-
             <div>
               <label className="block text-sm font-bold mb-1">House Fee %</label>
               <input className="w-full border px-3 py-2 rounded" placeholder="e.g. 10"
-                value={calc.houseFeePercent}
-                onChange={e => setCalculators([{ ...calc, houseFeePercent: e.target.value }])} />
+                     value={c.houseFeePercent}
+                     onChange={e=>setCalculators([{...c,houseFeePercent:e.target.value}])}/>
             </div>
-
             <div>
               <label className="block text-sm font-bold mb-1">Labor & Material</label>
               <input className="w-full border px-3 py-2 rounded" placeholder="e.g. 6000"
-                value={calc.laborMaterial}
-                onChange={e => setCalculators([{ ...calc, laborMaterial: e.target.value }])} />
+                     value={c.laborMaterial}
+                     onChange={e=>setCalculators([{...c,laborMaterial:e.target.value}])}/>
             </div>
           </div>
 
           <div className="mt-6 bg-blue-100 p-4 rounded-lg text-center">
             <h2 className="text-xl font-bold">Results</h2>
-            <p>House Fee: <b>{formatCurrency(houseFeeAmt)}</b></p>
-            <p>Total After Fees: <b>{formatCurrency(net)}</b></p>
+            <p>House Fee: <b>{fmt(houseAmt)}</b></p>
+            <p>Total After Fees: <b>{fmt(net)}</b></p>
           </div>
         </div>
       );
