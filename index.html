@@ -818,6 +818,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.contractAmount}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -834,6 +835,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.cashCheck}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -850,6 +852,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.laborMaterial}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -872,6 +875,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.financeAmount}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -884,6 +888,7 @@ export default function App() {
                         <label className="block text-sm font-bold mb-2">DEALER FEE</label>
                         <input
                           type="text"
+                          inputMode="decimal"
                           value={calc.dealerFee}
                           onChange={(e) => {
                             const newCalcs = [...calculators];
@@ -905,6 +910,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.creditCard}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -917,6 +923,7 @@ export default function App() {
                         <label className="block text-sm font-bold mb-2">CC FEE %</label>
                         <input
                           type="text"
+                          inputMode="decimal"
                           value={calc.creditCardFee}
                           onChange={(e) => {
                             const newCalcs = [...calculators];
@@ -942,6 +949,7 @@ export default function App() {
                         <div className="flex items-center bg-white border-2 rounded px-3 py-3 mb-2">
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.houseFeePercent}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -960,6 +968,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.rideAlong}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -977,6 +986,7 @@ export default function App() {
                           <span className="mr-2">$</span>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.rideAlongBonus || ''}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -1016,6 +1026,7 @@ export default function App() {
                           <label className="block text-sm font-bold mb-2">VETS ON CONTRACT</label>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.numVets}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -1044,6 +1055,7 @@ export default function App() {
                           <label className="block text-sm font-bold mb-2">REPS ON CONTRACT</label>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.numReps}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
@@ -1079,6 +1091,7 @@ export default function App() {
                           <label className="block text-sm font-bold mb-2">RIDE ALONGS ON CONTRACT</label>
                           <input
                             type="text"
+                            inputMode="decimal"
                             value={calc.numRideAlongs || ''}
                             onChange={(e) => {
                               const newCalcs = [...calculators];
